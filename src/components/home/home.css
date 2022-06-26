@@ -1,0 +1,52 @@
+/* .list-wrapper{
+    margin: 0;
+    padding: 0;
+    width: 80vw;
+    background-color:black;
+    position: absolute;
+    left: 50%;
+    transform: translateX("-50%");
+    display: grid;
+    grid-template-columns: repeat("auto-fill", 250px);
+    grid-auto-rows: '10px';
+} */
+
+.pin-img{
+    height: 100%;
+    width: 100%;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: 1s;
+    opacity: 1;
+}
+.pin-img:hover {
+    background-color: "black";
+    transform: scale(1.1);
+    transition: 1s;
+    border-radius: 15px;
+    
+}
+.pin-wrapper:hover{
+    opacity: 1;
+
+}
+.pin-wrapper:hover .pin-save-btn {
+    display: block;
+}
+.pin-save-btn{
+    position: absolute;
+    z-index: 5;
+    color: white;
+    right: 16px;
+    top: 15px;
+    cursor: pointer;
+    display: none;
+    height: 25px;
+    width: 60px;
+    border-radius: 15px;
+    background-color: #DE4839;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    border:none;
+}

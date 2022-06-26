@@ -1,38 +1,102 @@
-.App {
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+body {
+  margin: 0px;
+}
+.sign-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #efe2e2;
+}
+.sign-wrapper {
+  padding: 1rem 3rem;
+  border: 1px solid black;
+  border-radius: 8px;
+  background: white;
+}
+.sign-wrapper h1 {
+  font-size: 40px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+.sign-wrapper label {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.sign-wrapper input {
+  width: 300px;
+  height: 40px;
+  font-size: 20px;
+  padding: 3px 6px;
+}
+.sign-wrapper input:focus {
+  outline: none;
+}
+
+.name-container,
+.email-container,
+.password-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  flex-direction: column;
+}
+
+.sign-btn {
+  position: relative;
+  width: 180px;
+  height: 60px;
+  line-height: 60px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: center;
+  color: black;
+  transition: 0.5s;
+  border: 1px solid #ec1840;
+  cursor: pointer;
+}
+.sign-btn:hover {
+  border: 1px solid transparent;
+  color: white;
+  background: #ec1840 url(https://i.postimg.cc/wBXGXbWN/pixel.png);
+  transition-delay: 0.8s;
+  background-size: 180px;
+  animation: animate 0.8s steps(8) forwards;
+}
+@keyframes animate {
+  0% {
+    background-position-y: 0;
+  }
+  100% {
+    background-position-y: -480px;
+  }
+}
+.sign-btn a {
+  text-decoration: none;
+  color: black;
+}
+
+.sign-btn-container {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.menu-btn-container a > * {
+  margin: 0.5rem 1rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.create-pins{
+  color: #fff;
+  font-size: 35px;
+  font-weight: 600;
+  margin-right:3rem;
+  transition: 1s;
+  cursor: pointer;
 }
