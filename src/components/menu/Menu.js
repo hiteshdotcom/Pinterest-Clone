@@ -22,12 +22,12 @@ function Menu({ authorised, setAuthorised }) {
           </div>
           <a
             href="#"
-            class="toggle-button"
+            className="toggle-button"
             onClick={() => setButtonState(!buttonState)}
           >
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+            <span className="bar"></span>
+            <span className="bar"></span>
+            <span className="bar"></span>
           </a>
           <div
             className={` ${

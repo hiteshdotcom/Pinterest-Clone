@@ -1,24 +1,35 @@
-import React from "react";
-import "./home.css";
-import { useMutation, useQuery } from "@apollo/client";
-import { styles } from "../styles/styles";
-import Pin from "../pin/Pin";
+import './home.css';
 
-import { SAVED_PIN, QUERY_ALL_PINS } from "../query/query";
+import React from 'react';
+
+import {
+  useMutation,
+  useQuery,
+} from '@apollo/client';
+
+import Pin from '../pin/Pin';
+import {
+  QUERY_ALL_PINS,
+  SAVED_PIN,
+} from '../query/query';
+import { styles } from '../styles/styles';
 
 function PinterestLayout() {
-  const { data, loading } = useQuery(QUERY_ALL_PINS);
+  const { data, loading,error } = useQuery(QUERY_ALL_PINS);
   const [savePin] = useMutation(SAVED_PIN);
   const mainUser = localStorage.getItem("email");
 
   if (loading) {
     return <h1>Data is Loading!!!</h1>;
   }
+  if(error){
+    return <h1>{error.message}</h1>
+  }
   const size = ["small", "medium", "large"];
   const type = "pins";
   return (
     <div style={styles.pinterestLayout}>
-      {data.pins.map((pin) => {
+      {data?.pins.map((pin) => {
         const randomNumber = Math.floor(Math.random() * size.length);
         return (
           <Pin
