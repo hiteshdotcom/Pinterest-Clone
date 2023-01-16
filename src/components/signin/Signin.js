@@ -1,31 +1,35 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { notification } from "antd";
-const url = "http://localhost:3002/api/login";
+import React, { useState } from 'react';
+
+import { notification } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
+import { useMutation } from '@apollo/client';
+
+import { SIGN_IN } from '../query/query';
 
 function Signin({ setAuthorised }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const options = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    data: JSON.stringify({ email, password }),
-    url,
-  };
+  const [signInUser, {loading, error}] = useMutation(SIGN_IN, {
+    update(proxy,result){
+      console.log({result})
+    },
+    variables: {
+      email,
+      password
+    }
+  })
   const loginUser = async () => {
-    const { data } = await axios(options);
-    if (data.status === 200) {
+    const {data} = await signInUser()
+    if(!error){
       openNotificationWithIcon(
         "success",
         "You have succesfully loged in",
         "Successfully"
       );
       setAuthorised(true);
-      localStorage.setItem("token", data.data);
-      localStorage.setItem("email", email);
-
+      localStorage.setItem("token",data.token);
       navigate("/");
     } else {
       openNotificationWithIcon("error", `${data.error}`, "Error");
@@ -37,6 +41,10 @@ function Signin({ setAuthorised }) {
       description: message,
     });
   };
+
+  if(loading){
+    return <h1>Loading...</h1>
+  }
 
   return (
     <div className="sign-container">

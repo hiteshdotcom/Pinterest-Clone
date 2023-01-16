@@ -1,4 +1,5 @@
-import {gql} from '@apollo/client'
+import { gql } from '@apollo/client';
+
 export const QUERY_ALL_PINS = gql`
   query Query {
     pins {
@@ -53,6 +54,20 @@ mutation CreatePin($input: CreatePinInput!) {
     title
     description
     img
+  }
+}
+`;
+export const SIGN_UP = gql`
+mutation SignUp($email: String!,$name:String! ,$password: String!) {
+  signUp(email: $email, password: $password, name: $name ) {
+    token
+  }
+}
+`;
+export const SIGN_IN = gql`
+mutation SignIn($email: String!,$password: String!) {
+  signIn(email: $email, password: $password) {
+    token
   }
 }
 `;

@@ -1,17 +1,32 @@
-import React, { useState, useEffect } from "react";
+import './App.css';
+
+import React, {
+  useEffect,
+  useState,
+} from 'react';
+
 import {
-  Signin,
-  Signup,
+  BrowserRouter,
+  Route,
+  Routes,
+} from 'react-router-dom';
+
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+} from '@apollo/client';
+
+import {
   Create,
   Image,
-  SavedPins,
-  MyPins,
   Menu,
+  MyPins,
   PinterestLayout,
-} from "./components/index";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
-import "./App.css";
+  SavedPins,
+  Signin,
+  Signup,
+} from './components/index';
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -43,7 +58,7 @@ function App() {
           ) : (
             <>
               <Routes>
-                <Route exact path="/" element={<Signup />} />
+                <Route exact path="/" element={<Signup setAuthorised={setAuthorised} />} />
                 <Route
                   exact
                   path="/signin"

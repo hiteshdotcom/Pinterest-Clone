@@ -1,13 +1,30 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { notification } from "antd";
+import React, { useState } from 'react';
+
+import { notification } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
+import { useMutation } from '@apollo/client';
+
+import { SIGN_UP } from '../query/query';
 
 const url = "http://localhost:3002/api/register";
 
-function Signup() {
+function Signup({setAuthorised}) {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [addUser, {loading, error}] = useMutation(SIGN_UP, {
+    update(proxy,result){
+      console.log({result})
+    },
+    variables: {
+      email,
+      password,
+      name
+    }
+  })
   const openNotificationWithIcon = (type, message, title) => {
     notification[type]({
       message: title,
@@ -15,31 +32,30 @@ function Signup() {
     });
   };
   const createUser = async (type) => {
-    const result = await axios
-      .post(url, {
-        name,
-        email,
-        password,
-      })
-      .then((res) => {
-        if (res.data.status === 200) {
-          openNotificationWithIcon(
-            "success",
-            "you have succesfully created user",
-            "Success"
-          );
-        } else {
-          openNotificationWithIcon("error", `${res.data.error}`, "Error");
-        }
-      })
-      .catch((err) => {
+    const {data} = await addUser()
+    if(!error){
+      openNotificationWithIcon(
+                "success",
+                "you have succesfully created user",
+                "Success"
+      );
+      setAuthorised(true);
+      console.log({data});
+      localStorage.setItem("token",data.signUp.token);
+      navigate("/");
+    }else{
         openNotificationWithIcon(
-          "error",
+          error.message,
           "Something unusaul is happening call the developer",
           "Error"
         );
-      });
+    }
   };
+
+  if(loading){
+    return <h1>Loading...</h1>
+  }
+
 
   return (
     <div className="sign-container">
